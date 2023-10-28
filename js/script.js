@@ -25,7 +25,16 @@ for (let i = 0; i < linhasProdutos.length; i++) {
     
 }
 
-const botaonovo = document.querySelector('.bntnovo1');
-botaonovo.addEventListener('click',function(e){
-    
+const btnNovo = document.querySelector(".btnNovo");
+const tela = document.querySelector(".areaNovoProduto");
+const bloqueio  = document.querySelector(".block");
+
+function ClicouBotaoAdicionar(event)
+{
+	event.preventDefault();
+
+	tela.classList.remove("escondido");
+	bloqueio.classList.remove("escondido");
 }
+
+btnNovo.addEventListener("click", ClicouBotaoAdicionar);
