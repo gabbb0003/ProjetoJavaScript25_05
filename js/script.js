@@ -38,3 +38,50 @@ function ClicouBotaoAdicionar(event)
 }
 
 btnNovo.addEventListener("click", ClicouBotaoAdicionar);
+
+const bntSalvar = document.querySelector(".botaoSalvar")
+bntSalvar.addEventListener('click', adicionarNovoProduto);
+
+function adicionarNovoProduto(event)
+{
+    event.preventDefault
+
+    let nome = txtNome.value;
+    let quantidade = txtQtd.value;
+    let valor =  txtValor.value;
+
+    if( nome == "")
+    {
+        console.log("Nome inválido!!");
+        return;
+    }
+    else
+    {
+        console.log(nome)
+    }
+
+    if( quantidade == "")
+    {
+        console.log("Quantidade Inválida!!");
+        return;
+    }
+    else
+    {
+        console.log(quantidade)
+    }
+
+    /*float converte para número
+    quantidade = parseFloat(quantidade);
+    */
+
+    
+    if( valor == "")
+    {
+        console.log("Valor inválido!!");
+        return;
+    }
+    else
+    {
+        console.log(valor)
+    }
+}
