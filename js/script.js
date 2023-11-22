@@ -1,87 +1,106 @@
-function verificarSituacaoEstoque(quantidade)
+function formatarMoeda (valor)
 {
-    let quantidadeProduto = Number(quantidade);
-
-    if (quantidadeProduto < 100){
-        return "<span class='vermelho'>Comprar</span>";
-    }
-    else
-    {
-        return "Regular";
-    }
+    const numero = Number(valor);
+    const formatoMoeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL'});
+    const valorFormatado = formatoMoeda.format(numero);
+    return valorFormatado;
 }
 
-/* Código sem bloco de execução é executado imediatamente */
+function verificarEstoque(linha) 
+{
+    let valorQuantidade = Number(linha.children[2].textContent);
+    if (valorQuantidade <= 60) 
+    {
+        linha.children[4].innerHTML = "<span class='vermelho'>Comprar</span>";
+    } 
+    else 
+    {
+        linha.children[4].innerHTML = "Regular";
+    }
+}
 
 const linhasProdutos = document.querySelectorAll('.linha-produto');
 
-
 for (let i = 0; i < linhasProdutos.length; i++) {
-    
-    const localQuantidade = linhasProdutos[i].children[2];
-    const localSituacao = linhasProdutos[i].children[4];
-
-    localSituacao.innerHTML = verificarSituacaoEstoque(localQuantidade.textContent)
-    
+    verificarEstoque( linhasProdutos[i]);
 }
 
-const btnNovo = document.querySelector(".btnNovo");
-const tela = document.querySelector(".areaNovoProduto");
-const bloqueio  = document.querySelector(".block");
+const botaoNovo = document.querySelector('.btnNovo');
+const bloqueio = document.querySelector('.block');
+const form = document.querySelector('.areaNovoProduto');
 
-function ClicouBotaoAdicionar(event)
+botaoNovo.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const caixaNome = document.querySelector('#txtNome');
+    const caixaQtd = document.querySelector('#txtQtd');
+    const caixaValor = document.querySelector('#txtValor');
+
+    caixaNome.value = "";
+    caixaQtd.value = "";
+    caixaValor.value="";
+
+    bloqueio.classList.remove('escondido');
+    form.classList.remove('escondido');
+});
+
+
+const botaoCancelar = document.querySelector('#btnCancelarNovoProduto');
+if (botaoCancelar)
 {
-	event.preventDefault();
-
-	tela.classList.remove("escondido");
-	bloqueio.classList.remove("escondido");
+    botaoCancelar.addEventListener('click', function(e){
+        e.preventDefault();
+        bloqueio.classList.add('escondido');
+        form.classList.add('escondido');
+    });
 }
 
-btnNovo.addEventListener("click", ClicouBotaoAdicionar);
-
-const bntSalvar = document.querySelector(".botaoSalvar")
-bntSalvar.addEventListener('click', adicionarNovoProduto);
-
-function adicionarNovoProduto(event)
+const botaoSalvar = document.querySelector('#btnSalvarNovoProduto');
+if(botaoSalvar)
 {
-    event.preventDefault
+    botaoSalvar.addEventListener('click', function(e){
+        e.preventDefault();
 
-    let nome = txtNome.value;
-    let quantidade = txtQtd.value;
-    let valor =  txtValor.value;
+        let nome = document.querySelector('#txtNome').value;
+        let qtd = Number(document.querySelector('#txtQtd').value);
+        let valor = Number(document.querySelector('#txtValor').value);
 
-    if( nome == "")
-    {
-        console.log("Nome inválido!!");
-        return;
-    }
-    else
-    {
-        console.log(nome)
-    }
+        const produto = {
+            'nome': nome,
+            'qtd': qtd,
+            'valor': formatarMoeda(valor)
+        }
 
-    if( quantidade == "")
-    {
-        console.log("Quantidade Inválida!!");
-        return;
-    }
-    else
-    {
-        console.log(quantidade)
-    }
+        AdicionarLinha(produto);
 
-    /*float converte para número
-    quantidade = parseFloat(quantidade);
-    */
-
-    
-    if( valor == "")
-    {
-        console.log("Valor inválido!!");
-        return;
-    }
-    else
-    {
-        console.log(valor)
-    }
+        bloqueio.classList.add('escondido');
+        form.classList.add('escondido');
+    });    
 }
+
+// function inserircodigo()
+// {
+//     while (novaLinha !== "") 
+//     {
+//         let codigoproduto = Number(linha.children[0].textContent);
+//         codigoproduto = i;
+//         linha.children[0].innerHTML = i;
+//     }
+
+function AdicionarLinha(produto) 
+{
+    const tabelaProdutos = document.querySelector('.conteudoTabelaProdutos');
+    const novaLinha = document.createElement('tr');
+    novaLinha.classList.add('linha-produto');
+    novaLinha.innerHTML = `<td></td>
+                            <td>${produto.nome}</td>
+                            <td>${produto.qtd}</td>
+                            <td>${produto.valor}</td>
+                            <td></td>`;
+    tabelaProdutos.appendChild(novaLinha);
+
+    verificarEstoque(novaLinha);
+}
+
+let valorP = Number(linha.children[3].textContent);
+formatarMoeda(valorP)

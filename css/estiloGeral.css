@@ -1,7 +1,5 @@
 * { font-family: Verdana, Arial;  font-size: 14px; }
 
-.vermelho { color: red; }
-
 body { padding: 0; margin: 0; }
 
 main { width: 800px; margin: auto;}
@@ -102,3 +100,5 @@ input
 }
 
 .escondido { display:none; }
+
+.vermelho { color: red; }

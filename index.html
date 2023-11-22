@@ -4,10 +4,8 @@
 	<meta charset="utf-8">
 	<title>Produtos</title>
 	<link rel="stylesheet" type="text/css" href="css/estiloGeral.css">
-	
 </head>
 <body>
-	
 	<div class="block escondido"></div>
 	<section class="areaNovoProduto escondido">
 		<div>
@@ -27,14 +25,16 @@
 			<input type="number" id="txtValor" min="0" max="99999" step="0.01" placeholder="Valor unitário">
 		</div>
 		<div>
-			<button class="botaoSalvar">Salvar</button>
-			<button>Cancelar</button>
+			<button id="btnSalvarNovoProduto">Salvar</button>
+			<button id="btnCancelarNovoProduto">Cancelar</button>
 		</div>
 	</section>
 	<main>
 		<header>
 			<h1>Produtos</h1>
-			<button class="btnNovo">Novo</button>
+			<form>
+				<button class="btnNovo">Novo</button>
+			</form>
 		</header>
 
 		<table>
@@ -45,11 +45,11 @@
 				<th>Valor</th>
 				<th>Situação</th>
 			</thead>
-			<tbody>
+			<tbody class="conteudoTabelaProdutos">
 				<tr class="linha-produto">
 					<td>1001</td>
 					<td>Coca-Cola</td>
-					<td>200</td>
+					<td>2</td>
 					<td>12,00</td>
 					<td></td>
 				</tr>
@@ -116,9 +116,10 @@
 	                <td>5,00</td>
 	                <td></td>
 	            </tr>
+
 			</tbody>
 		</table>
 	</main>
-	<script type='text/javascript' src="js/script.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
